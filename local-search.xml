@@ -4,13 +4,19 @@
   
   
   <entry>
-    <title>湫</title>
-    <link href="/2021/07/25/%E6%B9%AB/"/>
-    <url>/2021/07/25/%E6%B9%AB/</url>
+    <title>Flex 布局教程：语法篇</title>
+    <link href="/2021/07/27/%E6%B9%AB/"/>
+    <url>/2021/07/27/%E6%B9%AB/</url>
     
-    <content type="html"><![CDATA[<h1 id="标题一"><a href="#标题一" class="headerlink" title="标题一"></a>标题一</h1><h2 id="标题二"><a href="#标题二" class="headerlink" title="标题二"></a>标题二</h2><p>​<br>CMS是Content Management System的缩写，意为”内容管理系统”。<br>在中国互联网的发展历程中，一直以来默默地为中国站长提供动力的CMS厂商作出的贡献尤其巨大，而与之成反比的是CMS厂商的生存状态依然令人担忧，由于国内站长对于免费和开源的FreeEIM尤为热衷，用户的版权意识低加之用户误将开源认 为就是免费的，使得一些获得资本注入的CMS厂商无法达到预期的目标，导致PHPCMS创始人淡淡风和DEDECMS创始人IT柏拉图相继离职事件，亦是2010年CMS行业最大的新闻，交流中，感受更多的是他们只是成功的技术狂热者，还不算真正的商人，CMS行业之路对他们还任重道远</p><h3 id="Header-3"><a href="#Header-3" class="headerlink" title="Header 3"></a>Header 3</h3><p>​</p><blockquote><p>This is a blockquote.</p><p>This is the second paragraph in the blockquote.</p><h2 id="This-is-an-H2-in-a-blockquote"><a href="#This-is-an-H2-in-a-blockquote" class="headerlink" title="This is an H2 in a blockquote"></a>This is an H2 in a blockquote</h2></blockquote>]]></content>
+    <content type="html"><![CDATA[<hr><blockquote><p><a href="https://www.ruanyifeng.com/blog/2015/07/flex-grammar.html">作者： 阮一峰</a></p></blockquote><hr><h3 id="网页布局（layout）是-CSS-的一个重点应用。"><a href="#网页布局（layout）是-CSS-的一个重点应用。" class="headerlink" title="网页布局（layout）是 CSS 的一个重点应用。"></a>网页布局（layout）是 CSS 的一个重点应用。</h3><p><img src="https://www.ruanyifeng.com/blogimg/asset/2015/bg2015071001.gif"></p><p>​布局的传统解决方案，基于盒状模型，依赖 display 属性 + position属性 + float属性。它对于那些特殊布局非常不方便，比如，垂直居中就不容易实现。</p><p><img src="https://www.ruanyifeng.com/blogimg/asset/2015/bg2015071002.png"></p><h1 id="一、Flex-布局是什么？"><a href="#一、Flex-布局是什么？" class="headerlink" title="一、Flex 布局是什么？"></a>一、Flex 布局是什么？</h1><hr><p>Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。</p><p>任何一个容器都可以指定为 Flex 布局。</p><pre><code>.box&#123;    display: flex;  &#125;</code></pre><p>行内元素也可以使用 Flex 布局。</p><pre><code>.box&#123;    display: inline-flex; &#125;</code></pre><p>Webkit 内核的浏览器，必须加上-webkit前缀。</p><pre><code>.box&#123;    display: -webkit-flex; /* Safari */    display: flex;&#125;</code></pre><p>注意，设为 Flex 布局以后，子元素的float、clear和vertical-align属性将失效。</p><h1 id="二、基本概念"><a href="#二、基本概念" class="headerlink" title="二、基本概念"></a>二、基本概念</h1><hr><p>采用 Flex 布局的元素，称为 Flex 容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称”项目”。</p><p><img src="https://www.ruanyifeng.com/blogimg/asset/2015/bg2015071004.png"></p><p>容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做<code>main start</code>，结束位置叫做<code>main end</code>；交叉轴的开始位置叫做<code>cross start</code>，结束位置叫做<code>cross end</code>。</p><p>项目默认沿主轴排列。单个项目占据的主轴空间叫做<code>main size</code>，占据的交叉轴空间叫做<code>cross size</code>。</p><h1 id="三、容器的属性"><a href="#三、容器的属性" class="headerlink" title="三、容器的属性"></a>三、容器的属性</h1><hr><p>以下6个属性设置在容器上。</p><pre><code>flex-directionflex-wrapflex-flowjustify-contentalign-itemsalign-content</code></pre><h2 id="3-1-flex-direction属性"><a href="#3-1-flex-direction属性" class="headerlink" title="3.1 flex-direction属性"></a>3.1 flex-direction属性</h2><hr><p><code>flex-directio</code>属性决定主轴的方向（即项目的排列方向）。</p><pre><code>.box &#123;    flex-direction: row | row-reverse | column | column-reverse;&#125;</code></pre><p><img src="https://www.ruanyifeng.com/blogimg/asset/2015/bg2015071005.png"></p><p>它可能有4个值。</p><pre><code>row（默认值）：主轴为水平方向，起点在左端。row-reverse：主轴为水平方向，起点在右端。column：主轴为垂直方向，起点在上沿。column-reverse：主轴为垂直方向，起点在下沿。</code></pre><h2 id="3-2-flex-wrap属性"><a href="#3-2-flex-wrap属性" class="headerlink" title="3.2 flex-wrap属性"></a>3.2 flex-wrap属性</h2><hr><p>默认情况下，项目都排在一条线（又称”轴线”）上。flex-wrap属性定义，如果一条轴线排不下，如何换行。</p><p><img src="https://www.ruanyifeng.com/blogimg/asset/2015/bg2015071006.png"></p><pre><code>.box&#123;     flex-wrap: nowrap | wrap | wrap-reverse;&#125;</code></pre><h3 id="它可能取三个值。"><a href="#它可能取三个值。" class="headerlink" title="它可能取三个值。"></a>它可能取三个值。</h3><p>（1）<code>nowrap（默认）:</code> 不换行。</p><p><img src="https://www.ruanyifeng.com/blogimg/asset/2015/bg2015071007.png"></p><p>（2）<code>wrap：换行</code>，第一行在上方。</p><p><img src="https://www.ruanyifeng.com/blogimg/asset/2015/bg2015071008.jpg"></p><p>（3）<code>wrap-reverse：</code>换行，第一行在下方。</p><p><img src="https://www.ruanyifeng.com/blogimg/asset/2015/bg2015071009.jpg"></p><h2 id="3-3-flex-flow"><a href="#3-3-flex-flow" class="headerlink" title="3.3 flex-flow"></a>3.3 flex-flow</h2><hr><p><code>flex-flow</code>属性是<code>flex-direction</code>属性和<code>flex-wrap</code>属性的简写形式，默认值为<code>row nowrap</code>。</p><pre><code>.box &#123;    flex-flow: &lt;flex-direction&gt; || &lt;flex-wrap&gt;;&#125;</code></pre>]]></content>
     
     
+    
+    <tags>
+      
+      <tag>布局</tag>
+      
+    </tags>
     
   </entry>
   
